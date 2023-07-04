@@ -76,8 +76,8 @@ public class BankCreditsServiceImpl implements BankCreditsService {
                 .flatMapSingle(this.bankCreditsRepository::save);
     }
 
-    @Override
+    /*@Override
     public Flowable<BankCredits> reportByCredits(String clientId) {
         return this.bankCreditsRepository.findByclientId(clientId);
-    }
+    }*/
 }

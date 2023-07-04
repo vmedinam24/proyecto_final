@@ -36,10 +36,10 @@ public class BankCreditsServiceController {
         return this.bankCreditsService.productCharge(bankCreditsId,amount);
     }
 
-    @GetMapping("/report")
+    /*@GetMapping("/report")
     public Flowable<BankCredits> reportByCredits(@RequestParam String clientId){
         return this.bankCreditsService.reportByCredits(clientId);
-    }
+    }*/
 
 
 }

@@ -1,13 +1,14 @@
 package com.nttdata.bankproducts.repository;
 
 import com.nttdata.bankproducts.document.BankAccount;
-import io.reactivex.rxjava3.core.Maybe;
+import com.nttdata.bankproducts.response.BankAccountResponse;
 import org.springframework.data.repository.reactive.RxJava3CrudRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 
 @Repository
 public interface BankAccountRepository
         extends RxJava3CrudRepository<BankAccount, String>  {
-    Maybe<BankAccount> findByclientId(String clientId);
-
+    Flux<BankAccountResponse> findByclientId(String clientId);
+    Flux<BankAccountResponse> findBynumberDebitCard(String numberDebitCard);
 }

@@ -11,5 +11,5 @@ public interface BankCreditsService {
     Maybe<BankCredits> read(String bankCreditsId);
     Maybe<BankCredits> productPayment(String bankCreditsId, Double amount);
     Maybe<BankCredits> productCharge(String bankCreditsId, Double amount);
-    Flowable<BankCredits> reportByCredits(String clientId);
+    //Flowable<BankCredits> reportByCredits(String clientId);
 }

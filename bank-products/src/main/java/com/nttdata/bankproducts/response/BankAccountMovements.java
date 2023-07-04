@@ -1,29 +1,27 @@
-package com.nttdata.bankproducts.document;
+package com.nttdata.bankproducts.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.nttdata.bankproducts.document.Tranfers;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "accounts")
-public class BankAccount {
-    @Id
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class BankAccountMovements {
+
     private String accountNumberId;
     private String clientId;
     private String numberDebitCard;
     private String nameTypeAccount;
     private Double totalAmount;
-    private Integer totalTransfers = 0;
-    private Integer countCommissions = 0;
     private List<Tranfers> tranfersList = new ArrayList<>();
+
 }

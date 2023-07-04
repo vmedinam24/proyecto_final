@@ -1,4 +1,4 @@
-package com.nttdata.clients.dto;
+package com.nttdata.bankproducts.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ClientDto {
+public class BankAccountResponse {
+    private String accountNumberId;
     private String clientId;
-    private String name;
-    private String lastName;
-    private Integer phone;
-    private String email;
-    private String tipo;
+    private String numberDebitCard;
+    private String nameTypeAccount;
+    private Double totalAmount;
 }

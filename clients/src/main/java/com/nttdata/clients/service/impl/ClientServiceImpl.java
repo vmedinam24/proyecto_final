@@ -1,6 +1,7 @@
 package com.nttdata.clients.service.impl;
 
 import com.nttdata.clients.document.Client;
+import com.nttdata.clients.dto.ClientDto;
 import com.nttdata.clients.repository.ClientRepository;
 import com.nttdata.clients.service.ClientService;
 import io.reactivex.rxjava3.core.Completable;

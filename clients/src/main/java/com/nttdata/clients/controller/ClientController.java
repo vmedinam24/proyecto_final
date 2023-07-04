@@ -4,6 +4,7 @@
 package com.nttdata.clients.controller;
 
 import com.nttdata.clients.document.Client;
+import com.nttdata.clients.dto.ClientDto;
 import com.nttdata.clients.service.ClientService;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
@@ -27,8 +28,7 @@ public class ClientController {
 
     @RequestMapping
     public Flowable<Client> getAll() {
-        Flowable<Client> clients = clientService.getAll();
-        return clients;
+        return this.clientService.getAll();
     }
 
     @PostMapping
