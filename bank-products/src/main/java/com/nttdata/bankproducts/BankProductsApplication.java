@@ -7,9 +7,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 public class BankProductsApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(BankProductsApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(BankProductsApplication.class, args);
+  }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "micro-client")
 public interface ClientFeign {
 
-    @GetMapping("/get/{clientId}")
-    Maybe<Client> read(@PathVariable String clientId);
+  @GetMapping("/get/{clientId}")
+  Maybe<Client> read(@PathVariable String clientId);
 
 }

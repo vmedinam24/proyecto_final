@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClientDto {
-    private String clientId;
-    private String name;
-    private String lastName;
-    private Integer phone;
-    private String email;
-    private String tipo;
+  private String clientId;
+  private String name;
+  private String lastName;
+  private Integer phone;
+  private String email;
+  private String tipo;
 }

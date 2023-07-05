@@ -14,10 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "credits")
 public class BankCredits {
 
-    @Id
-    private String creditsId;
-    private String clientId;
-    private String nameTypeCredits;
-    private Double creditsAmount;
-    private Double totalAmount;
+  @Id
+  private String creditsId;
+  private String clientId;
+  private String nameTypeCredits;
+  private Double creditsAmount;
+  private Double totalAmount;
 }

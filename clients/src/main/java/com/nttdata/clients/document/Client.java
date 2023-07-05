@@ -14,11 +14,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "clients")
 public class Client {
 
-    @Id
-    private String clientId;
-    private String name;
-    private String lastName;
-    private Integer phone;
-    private String email;
-    private String type;
+  @Id
+  private String clientId;
+  private String name;
+  private String lastName;
+  private Integer phone;
+  private String email;
+  private String type;
 }

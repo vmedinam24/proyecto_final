@@ -5,16 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Tranfers {
 
-    private String type;
-    private String date;
-    private Double amount;
+  private String type;
+  private String date;
+  private Double amount;
 
 }

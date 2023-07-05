@@ -7,6 +7,6 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface BankCreditsRepository
-        extends RxJava3CrudRepository<BankCredits, String> {
-    Flux<BankCredits> findByclientId(String clientId);
+    extends RxJava3CrudRepository<BankCredits, String> {
+  Flux<BankCredits> findByclientId(String clientId);
 }

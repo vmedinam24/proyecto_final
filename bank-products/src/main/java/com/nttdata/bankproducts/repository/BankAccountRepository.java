@@ -8,7 +8,8 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface BankAccountRepository
-        extends RxJava3CrudRepository<BankAccount, String>  {
-    Flux<BankAccountResponse> findByclientId(String clientId);
-    Flux<BankAccountResponse> findBynumberDebitCard(String numberDebitCard);
+    extends RxJava3CrudRepository<BankAccount, String>  {
+  Flux<BankAccountResponse> findByclientId(String clientId);
+
+  Flux<BankAccountResponse> findBynumberDebitCard(String numberDebitCard);
 }
