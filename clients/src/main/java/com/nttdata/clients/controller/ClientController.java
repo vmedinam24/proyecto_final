@@ -22,26 +22,43 @@ public class ClientController {
   @Autowired
   private ClientService clientService;
 
+  /**
+   * Returns all the customers in the database.
+   *
+   * @return Flowable
+   */
   @RequestMapping
   public Flowable<Client> getAll() {
     return this.clientService.getAll();
   }
 
+  /**
+   * Create a new client and check if the client exist.
+   *
+   * @param client    an object of client.
+   * @return Maybe
+   */
   @PostMapping
   public Maybe<Client> create(@RequestBody Client client) {
     return clientService.create(client);
   }
 
+  /**
+   * Displays the required client based on its identifier.
+   *
+   * @param clientId    a string of client identifier.
+   * @return Maybe
+   */
   @GetMapping("/get/{clientId}")
   public Maybe<Client> read(@PathVariable String clientId) {
     return clientService.read(clientId);
   }
 
   /**
-   * Metodo update, modifica los atributos de un objeto cliente.
+   * Update a client with new data.
    *
-   * @param client objeto de tipo cliente
-   * @return regresa un Maybe con los datos actualizados
+   * @param client    an object of client.
+   * @return Maybe
    */
   @PutMapping("/update")
   public Maybe<Client> update(@RequestBody Client client) {
@@ -49,10 +66,10 @@ public class ClientController {
   }
 
   /**
-   * Metodo delete, borra de manera permanente un objeto de tipo cliente.
+   * Delete a client based on its identifier.
    *
-   * @param clientId id del cliente
-   * @return regresa un Completable correcto
+   * @param clientId   a string of client identifier
+   * @return Completable
    */
   @DeleteMapping("/delete/{clientId}")
   public Completable delete(@PathVariable String clientId) {

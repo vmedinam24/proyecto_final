@@ -8,5 +8,12 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface BankCreditsRepository
     extends RxJava3CrudRepository<BankCredits, String> {
+
+  /**
+   * Find Bank Credits by client identifier.
+   *
+   * @param clientId    a string identifier.
+   * @return Flux.
+   */
   Flux<BankCredits> findByclientId(String clientId);
 }

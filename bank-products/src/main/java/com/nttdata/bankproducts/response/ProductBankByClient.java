@@ -14,9 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductBankByClient {
-
+  /**
+   * Identifier of each client.
+   */
   private String clientId;
+  /**
+   * List of Bank Account by client identifier.
+   */
   private List<BankAccountResponse> bankAccounts;
+  /**
+   * List of Bank Credits by client identifier.
+   */
   private List<BankCredits> bankCredits;
 
 }

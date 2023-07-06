@@ -7,6 +7,12 @@ public interface ClientMapper {
 
   //ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
+  /**
+   * Maps a data type client dto to client.
+   *
+   * @param clientDto   an object to convert.
+   * @return  client    with data of client dto.
+  */
   default Client map(ClientDto clientDto) {
     return Client.builder()
         .clientId(clientDto.getClientId())
@@ -14,10 +20,16 @@ public interface ClientMapper {
         .lastName(clientDto.getLastName())
         .phone(clientDto.getPhone())
         .email(clientDto.getEmail())
-        .type(clientDto.getTipo())
+        .type(clientDto.getType())
         .build();
   }
 
+  /**
+   * Maps a data type client to client dto.
+   *
+   * @param client   an object to convert.
+   * @return  clientDto    with data of client.
+   */
   default ClientDto map(Client client) {
     return ClientDto.builder()
         .clientId(client.getClientId())
@@ -25,7 +37,7 @@ public interface ClientMapper {
         .lastName(client.getLastName())
         .phone(client.getPhone())
         .email(client.getEmail())
-        .tipo(client.getType())
+        .type(client.getType())
         .build();
   }
 }

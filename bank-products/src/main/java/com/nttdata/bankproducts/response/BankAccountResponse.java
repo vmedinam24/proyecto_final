@@ -12,9 +12,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BankAccountResponse {
+  /**
+   * Account number.
+   */
   private String accountNumberId;
+  /**
+   * Identifier of each client.
+   */
   private String clientId;
+  /**
+   * Debit Card Number.
+   */
   private String numberDebitCard;
+  /**
+   * Type account (Savings account, Current account, Fixed Term Account).
+   */
   private String nameTypeAccount;
+  /**
+   * Total amount in account.
+   */
   private Double totalAmount;
 }

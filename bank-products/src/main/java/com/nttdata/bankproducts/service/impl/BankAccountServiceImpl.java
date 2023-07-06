@@ -1,7 +1,7 @@
 package com.nttdata.bankproducts.service.impl;
 
 import com.nttdata.bankproducts.document.BankAccount;
-import com.nttdata.bankproducts.document.Tranfers;
+import com.nttdata.bankproducts.document.Transfers;
 import com.nttdata.bankproducts.feign.ClientFeign;
 import com.nttdata.bankproducts.repository.BankAccountRepository;
 import com.nttdata.bankproducts.repository.BankCreditsRepository;
@@ -21,21 +21,32 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
-
 @Service
 public class BankAccountServiceImpl implements BankAccountService {
 
+  /**
+   * Bank Account repository.
+   */
   @Autowired
   private BankAccountRepository bankAccountRepository;
 
+  /**
+   * Bank Credits repository.
+   */
   @Autowired
   private BankCreditsRepository bankCreditsRepository;
 
+  /**
+   * Connection client.
+   */
   @Autowired
   private ClientFeign clientFeign;
 
+  /**
+   * Returns all the bank accounts.
+   *
+   * @return  Flowable
+   */
   @Override
   public Flowable<BankAccountResponse> getAll() {
     return this.bankAccountRepository
@@ -43,6 +54,12 @@ public class BankAccountServiceImpl implements BankAccountService {
         .map(BankAccountMapper.INSTANCE::map);
   }
 
+  /**
+   * Create a new bank account and check if the bank account exist.
+   *
+   * @param bankAccount   an object of bank account.
+   * @return  Maybe
+   */
   @Override
   public Maybe<BankAccountResponse> create(BankAccount bankAccount) {
     return this.bankAccountRepository
@@ -69,6 +86,12 @@ public class BankAccountServiceImpl implements BankAccountService {
         .map(BankAccountMapper.INSTANCE::map);
   }
 
+  /**
+   * Displays the required bank account based on its identifier.
+   *
+   * @param bankAccountId   a string of bank account identifier
+   * @return Maybe
+   */
   @Override
   public Maybe<BankAccountResponse> read(String bankAccountId) {
     return bankAccountRepository
@@ -76,10 +99,19 @@ public class BankAccountServiceImpl implements BankAccountService {
         .map(BankAccountMapper.INSTANCE::map);
   }
 
+  /**
+   * Type of transfer that deposit an amount of money in a bank account.
+   *
+   * @param bankAccountId   a string of bank account identifier
+   * @param amount          an amount of money
+   * @return Maybe
+   */
   @Override
-  public Maybe<BankAccountResponse> deposit(String bankAccountId, Double amount) {
-    Tranfers tranfers = new Tranfers("deposit",
-        DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a").format(LocalDateTime.now()),
+  public Maybe<BankAccountResponse> deposit(String bankAccountId,
+                                            Double amount) {
+    Transfers transfers = new Transfers("deposit",
+        DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a")
+            .format(LocalDateTime.now()),
         amount);
     return this.bankAccountRepository
         .findById(bankAccountId)
@@ -92,9 +124,10 @@ public class BankAccountServiceImpl implements BankAccountService {
           bankAccount
               .setTotalTransfers(
                   bankAccount.getTotalTransfers() + 1);
-          bankAccount.getTranfersList().add(tranfers);
+          bankAccount.getTransfersList().add(transfers);
           if (bankAccount.getTotalTransfers() >= 20) {
-            bankAccount.setCountCommissions(bankAccount.getCountCommissions() + 1);
+            bankAccount.setCountCommissions(
+                bankAccount.getCountCommissions() + 1);
             bankAccount.setTotalAmount(
                 bankAccount.getTotalAmount() - 4);
           }
@@ -105,10 +138,19 @@ public class BankAccountServiceImpl implements BankAccountService {
 
   }
 
+  /**
+   * Type of transfer that withdraw an amount of money in a bank account.
+   *
+   * @param bankAccountId   a string of bank account identifier
+   * @param amount          an amount of money
+   * @return Maybe
+   */
   @Override
-  public Maybe<BankAccountResponse> withdraw(String bankAccountId, Double amount) {
-    Tranfers tranfers = new Tranfers("withdraw",
-        DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a").format(LocalDateTime.now()),
+  public Maybe<BankAccountResponse> withdraw(String bankAccountId,
+                                             Double amount) {
+    Transfers transfers = new Transfers("withdraw",
+        DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a")
+            .format(LocalDateTime.now()),
         amount);
     return this.bankAccountRepository
         .findById(bankAccountId)
@@ -121,9 +163,11 @@ public class BankAccountServiceImpl implements BankAccountService {
             bankAccount
                 .setTotalTransfers(
                     bankAccount.getTotalTransfers() + 1);
-            bankAccount.getTranfersList().add(tranfers);
+            bankAccount.getTransfersList().add(transfers);
             if (bankAccount.getTotalTransfers() >= 20) {
-              bankAccount.setCountCommissions(bankAccount.getCountCommissions() + 1);
+              bankAccount
+                  .setCountCommissions(
+                      bankAccount.getCountCommissions() + 1);
               bankAccount.setTotalAmount(
                   bankAccount.getTotalAmount() - 4);
             }
@@ -141,9 +185,18 @@ public class BankAccountServiceImpl implements BankAccountService {
         return this.bankAccountRepository.findByclientId(clientId);
     }*/
 
+  /**
+   * Transfer an amount of money of bank account to other bank account.
+   *
+   * @param bankAccountId1    bank account to transfer money
+   * @param bankAccountId2    bank account to which the money is transferred.
+   * @param amount            an amount of money
+   * @return Maybe
+   */
   @Override
   public Maybe<BankAccountResponse> transfers(String bankAccountId1,
-                                              String bankAccountId2, Double amount) {
+                                              String bankAccountId2,
+                                              Double amount) {
     return this.bankAccountRepository
         .findById(bankAccountId1)
         .flatMap(bankAccount -> deposit(bankAccountId1, amount))
@@ -154,6 +207,12 @@ public class BankAccountServiceImpl implements BankAccountService {
         );
   }
 
+  /**
+   * Summary of all products bank associate with a client identifier.
+   *
+   * @param clientId    a string of client identifier.
+   * @return product bank by client
+   */
   @Override
   public ProductBankByClient summary(String clientId) {
     ProductBankByClient productBankByClient = new ProductBankByClient();
@@ -169,9 +228,16 @@ public class BankAccountServiceImpl implements BankAccountService {
     return productBankByClient;
   }
 
+  /**
+   * Report of all bank accounts associate with a number of debit card.
+   *
+   * @param numberDebitCard   a string of debit card.
+   * @return Bank Account by debit card
+   */
   @Override
   public BankAccountByDebitCard reportByDebitCard(String numberDebitCard) {
-    BankAccountByDebitCard bankAccountByDebitCard = new BankAccountByDebitCard();
+    BankAccountByDebitCard bankAccountByDebitCard =
+        new BankAccountByDebitCard();
     bankAccountByDebitCard.setNumberDebitCard(numberDebitCard);
     bankAccountByDebitCard.setBankAccounts(this.bankAccountRepository
         .findBynumberDebitCard(numberDebitCard)
@@ -180,6 +246,12 @@ public class BankAccountServiceImpl implements BankAccountService {
     return bankAccountByDebitCard;
   }
 
+  /**
+   * Report of movements of a bank account.
+   *
+   * @param bankAccountId   a string of bank account identifier.
+   * @return Maybe
+   */
   @Override
   public Maybe<BankAccountMovements> movements(String bankAccountId) {
     return this.bankAccountRepository.findById(bankAccountId)

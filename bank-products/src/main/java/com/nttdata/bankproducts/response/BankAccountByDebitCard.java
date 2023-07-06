@@ -11,6 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BankAccountByDebitCard {
+  /**
+   * Number of Debit Card.
+   */
   private String numberDebitCard;
+  /**
+   * List of Bank Accounts.
+   */
   private List<BankAccountResponse> bankAccounts;
 }

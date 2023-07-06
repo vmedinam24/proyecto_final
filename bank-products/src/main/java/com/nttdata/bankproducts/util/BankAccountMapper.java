@@ -9,6 +9,12 @@ import org.mapstruct.factory.Mappers;
 public interface BankAccountMapper {
   BankAccountMapper INSTANCE = Mappers.getMapper(BankAccountMapper.class);
 
+  /**
+   * Maps a data type bank account response to bank account.
+   *
+   * @param bankAccountResponse   an object to convert
+   * @return  bank account
+   */
   default BankAccount map(BankAccountResponse bankAccountResponse) {
     return BankAccount.builder()
         .accountNumberId(bankAccountResponse.getAccountNumberId())
@@ -19,6 +25,12 @@ public interface BankAccountMapper {
         .build();
   }
 
+  /**
+   * Maps a data type bank account to bank account response.
+   *
+   * @param bankAccount   an object to convert
+   * @return  bank account response
+   */
   default BankAccountResponse map(BankAccount bankAccount) {
     return BankAccountResponse.builder()
         .accountNumberId(bankAccount.getAccountNumberId())

@@ -8,8 +8,15 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface BankAccountMovementMapper {
 
-  BankAccountMovementMapper INSTANCE = Mappers.getMapper(BankAccountMovementMapper.class);
+  BankAccountMovementMapper INSTANCE = Mappers.getMapper(
+      BankAccountMovementMapper.class);
 
+  /**
+   * Maps a data type bank account movements to bank account.
+   *
+   * @param bankAccountMovements    an object to convert
+   * @return bank account
+   */
   default BankAccount map(BankAccountMovements bankAccountMovements) {
     return BankAccount.builder()
         .accountNumberId(bankAccountMovements.getAccountNumberId())
@@ -17,10 +24,16 @@ public interface BankAccountMovementMapper {
         .numberDebitCard(bankAccountMovements.getNumberDebitCard())
         .nameTypeAccount(bankAccountMovements.getNameTypeAccount())
         .totalAmount(bankAccountMovements.getTotalAmount())
-        .tranfersList(bankAccountMovements.getTranfersList())
+        .transfersList(bankAccountMovements.getTransfersList())
         .build();
   }
 
+  /**
+   * Maps a data type bank account to bank account movements.
+   *
+   * @param bankAccount   an object to convert
+   * @return  bank account movements
+   */
   default BankAccountMovements map(BankAccount bankAccount) {
     return BankAccountMovements.builder()
         .accountNumberId(bankAccount.getAccountNumberId())
@@ -28,7 +41,7 @@ public interface BankAccountMovementMapper {
         .numberDebitCard(bankAccount.getNumberDebitCard())
         .nameTypeAccount(bankAccount.getNameTypeAccount())
         .totalAmount(bankAccount.getTotalAmount())
-        .tranfersList(bankAccount.getTranfersList())
+        .transfersList(bankAccount.getTransfersList())
         .build();
   }
 

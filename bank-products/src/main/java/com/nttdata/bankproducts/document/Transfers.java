@@ -9,10 +9,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Tranfers {
+public class Transfers {
 
+  /**
+   * Type of transfer (deposit, withdraw).
+   */
   private String type;
+  /**
+   * Date and hour of transfer.
+   */
   private String date;
+  /**
+   * Amount of transfer.
+   */
   private Double amount;
 
 }

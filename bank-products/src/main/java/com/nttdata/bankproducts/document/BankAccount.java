@@ -15,13 +15,38 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "accounts")
 public class BankAccount {
+
+  /**
+   * Account number.
+   */
   @Id
   private String accountNumberId;
+  /**
+   * Identifier of each client.
+   */
   private String clientId;
+  /**
+   * Debit Card Number.
+   */
   private String numberDebitCard;
+  /**
+   * Type account (Savings account, Current account, Fixed Term Account).
+   */
   private String nameTypeAccount;
+  /**
+   * Total amount in account.
+   */
   private Double totalAmount;
+  /**
+   * Number of transfers (deposit, withdraw).
+   */
   private Integer totalTransfers = 0;
+  /**
+   * Number of commissions after 20 transfers.
+   */
   private Integer countCommissions = 0;
-  private List<Tranfers> tranfersList = new ArrayList<>();
+  /**
+   * List of transfers with Date a type of transfers by client.
+   */
+  private List<Transfers> transfersList = new ArrayList<>();
 }
