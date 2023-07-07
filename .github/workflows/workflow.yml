@@ -17,6 +17,6 @@ jobs:
             distribution: 'adopt'
             java-version: 11
         - name: Mave Package
-          run: mvn -B clean package --file pom.xml
+          run: mvn -B clean package -DskipTests
         - name: Maven Verify
           run: mvn -B clean verify
